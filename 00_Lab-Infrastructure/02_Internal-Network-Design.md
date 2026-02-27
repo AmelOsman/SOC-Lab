@@ -1,144 +1,90 @@
-# Internal Network Design (SOC Lab)
+# UTM Network Model (Lab Infrastructure)
 
 ## Objective
 
-Define and standardize the internal network architecture used in the Phase 1 SOC lab.
+Define the baseline UTM networking model used across all phases of the SOC Lab.
 
-This design ensures:
-- Safe attack simulation
-- Controlled segmentation
-- Proper log visibility
-- No exposure to the host or home network
+This document is **phase-agnostic** and describes the safe default network approach for building isolated cybersecurity labs on macOS.
 
 ---
 
-## Network Model Overview
+## Design Principles
 
-All virtual machines operate inside an isolated UTM Internal Network.
-
-Security Onion has:
-- 1x Internal Adapter (lab traffic monitoring)
-- 1x NAT Adapter (internet access for updates only)
-
-All other VMs use:
-- Internal Adapter only
-
-Bridged mode is NOT used.
+- **Isolation first:** Lab traffic stays inside UTM’s Internal Network
+- **No exposure:** Bridged networking is not used
+- **Controlled internet access:** NAT is used only when updates or packages are required
+- **Reproducible:** Same network model across phases, with phase-specific diagrams stored separately
 
 ---
 
-## Logical Architecture Diagram
+## Network Types Used
 
-```
-[ Internet ]
-      |
-   (NAT Adapter)
-      |
----------------------
-|  Security Onion  |
----------------------
-      |
-[ Internal Network Switch ]
-   |       |       |       |        |
- Win11   Ubuntu   Kali   Metasploitable  Windows Server DC
-```
+### Internal Network (Primary)
+Used for:
+- VM-to-VM communication inside the lab
+- Attack simulation traffic (Kali → targets)
+- Log forwarding to Security Onion
+- Domain services communication (AD / DNS)
 
----
+Security benefit:
+- Traffic is isolated from your real LAN
+- Prevents accidental scanning or pivoting into home/enterprise network
 
-## Network Segmentation Logic
+### NAT (Secondary / Temporary)
+Used for:
+- OS updates
+- Package installs (apt, Windows updates)
+- Downloading tools/agents when needed
 
-### Security Onion
-- Acts as centralized SIEM
-- Monitors all internal lab traffic
-- Receives logs from endpoints
+Usage standard:
+- Enable NAT only when required
+- Disable NAT afterward for maximum isolation
 
-### Windows Server 2025
-- Domain Controller
-- DNS for lab
-- Static IP required
+### Bridged Networking (Not Used)
+Bridged mode is NOT used in this lab.
 
-### Windows 11
-- Domain joined endpoint
-- Sysmon installed
-- Forwards logs to Security Onion
-
-### Ubuntu 22.04
-- Linux endpoint
-- Syslog forwarding configured
-
-### Kali Linux
-- Attacker machine
-- Used for:
-  - Nmap scans
-  - Exploit testing
-  - Lateral movement simulation
-
-### Metasploitable 2
-- Vulnerable Linux target
-- Used for exploitation validation
+Reason:
+- Bridged networking can place VMs directly on your real network
+- This increases risk and breaks isolation assumptions
 
 ---
 
-## IP Addressing Standard
+## Standard NIC Strategy
 
-Recommended Static IP Range:
+### Security Onion (2 NICs)
+- NIC 1: Internal Network (SOC-LAB)
+- NIC 2: NAT (temporary internet access)
 
-192.168.100.0/24
+### All Other VMs (1 NIC)
+- NIC 1: Internal Network (SOC-LAB)
 
-Example Assignments:
-
-- Security Onion: 192.168.100.10
-- Windows Server DC: 192.168.100.20
-- Windows 11: 192.168.100.30
-- Ubuntu: 192.168.100.40
-- Kali: 192.168.100.50
-- Metasploitable: 192.168.100.60
-
-Gateway:
-Not required (internal network only)
-
-DNS:
-Windows Server DC (192.168.100.20)
+This ensures:
+- Security Onion can update when needed
+- The lab remains isolated by default
 
 ---
 
-## Security Design Decisions
+## Phase-Based Network Diagrams
 
-1. No Bridged Networking  
-   Prevents lab traffic from reaching home LAN.
+Phase-specific diagrams are stored separately (and will expand as the lab evolves):
 
-2. Security Onion as Monitoring Hub  
-   All log visibility centralized.
+`/00_Lab-Infrastructure/Network-Diagrams/`
 
-3. Static IP Infrastructure  
-   Required for:
-   - Domain stability
-   - DNS resolution
-   - Log forwarding consistency
-
-4. NAT Only Where Necessary  
-   Reduces attack surface.
+- Phase-1-Network-Diagram
+- Phase-2-Network-Diagram
+- Phase-3-Network-Diagram
+- Phase-4-Network-Diagram
 
 ---
 
-## Validation Checklist
+## Security Note (Public Repository)
 
-Before moving to VM builds:
+Any IP ranges referenced in this repository use RFC1918 private ranges (e.g., 192.168.x.x) and exist only inside the isolated UTM lab.
 
-- Internal network created in UTM
-- Security Onion configured with dual NICs
-- All other VMs assigned internal adapter
-- IP addressing plan documented
+No public IPs, credentials, or sensitive environment data are published.
 
 ---
 
 ## Outcome
 
-A properly segmented, enterprise-style lab network designed for:
-
-- Detection engineering
-- Attack simulation
-- Log pipeline validation
-- SOC workflow development
-
-This architecture mirrors real-world SOC infrastructure segmentation.
+A standardized UTM network model that remains consistent across phases while allowing each phase to define its own architecture diagram as complexity increases.
