@@ -1,0 +1,13 @@
+            [ Internet ]
+                 |
+            (NAT Adapter)
+                 |
+        ---------------------
+        |   Security Onion  |
+        ---------------------
+                 |
+           [ Internal Switch ]
+        |      |      |      |
+   Win11   Ubuntu   Kali   Metasploitable
+            |
+       Windows Server DC
