@@ -6,16 +6,12 @@ Install UTM on macOS to serve as the virtualization platform for the SOC Lab env
 
 This document ensures the lab environment is reproducible and standardized.
 
----
-
 ## System Requirements
 
 - macOS (Apple Silicon or Intel)
 - Minimum 16 GB RAM recommended
 - Minimum 200 GB free disk space
 - Administrative privileges
-
----
 
 ## Step 1 — Download UTM
 
@@ -24,8 +20,6 @@ This document ensures the lab environment is reproducible and standardized.
 3. Open the downloaded `.dmg` file
 4. Drag UTM into the Applications folder
 
----
-
 ## Step 2 — Grant Permissions
 
 1. Open **System Settings**
@@ -33,15 +27,11 @@ This document ensures the lab environment is reproducible and standardized.
    Privacy & Security → Full Disk Access
 3. Ensure UTM has permission (if prompted)
 
----
-
 ## Step 3 — Initial Launch
 
 1. Open UTM from Applications
 2. Allow any macOS security prompts
 3. Confirm UTM launches successfully
-
----
 
 ## Step 4 — Networking Standards for SOC Lab
 
@@ -56,16 +46,12 @@ This ensures:
 - Network segmentation
 - No exposure to home or enterprise LAN
 
----
-
 ## Validation
 
 Confirm:
 - UTM launches without error
 - You can create a new virtual machine
 - Internal network option is available
-
----
 
 ## Outcome
 
