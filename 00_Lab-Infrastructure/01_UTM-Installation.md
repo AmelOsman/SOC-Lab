@@ -16,9 +16,9 @@ Download the latest macOS version.
 
 ### Screenshot — UTM Website
 
-![UTM Website](Screenshots/P0-UTM-01-Website.png)
+![UTM Download Page](Screenshots/P0-UTM-01-Download-Page.png)
 
-**What this shows:**  
+**What this shows:** 
 The official UTM download page.
 
 **Why this matters:**  
@@ -32,7 +32,7 @@ Confirm the file appears in your Downloads folder or on your Desktop.
 
 ### Screenshot — UTM Download Complete
 
-![UTM Download Complete](Screenshots/P0-UTM-02-Download-Complete.png)
+![UTM Download Page](Screenshots/P0-UTM-02-Download-Page.png)
 
 **What this shows:**  
 The downloaded `UTM.dmg` file.
@@ -48,7 +48,7 @@ The installation window will open.
 
 ### Screenshot — DMG Opened
 
-![UTM DMG Opened](Screenshots/P0-UTM-03-DMG-Opened.png)
+![UTM Download Page](Screenshots/P0-UTM-03-Download-Page.png)
 
 **What this shows:**  
 The UTM installation window with the application icon.
@@ -62,7 +62,7 @@ Drag the UTM icon into the Applications folder shortcut in the installer window.
 
 ### Screenshot — Drag to Applications
 
-![Drag to Applications](Screenshots/P0-UTM-04-Drag-Applications.png)
+![UTM Download Page](Screenshots/P0-UTM-04-Download-Page.png)
 
 **What this shows:**  
 UTM being moved into the macOS Applications directory.
@@ -78,7 +78,7 @@ UTM may prompt for macOS security permissions the first time it launches.
 
 ### Screenshot — UTM First Launch
 
-![UTM First Launch](Screenshots/P0-UTM-05-First-Launch.png)
+![UTM Download Page](Screenshots/P0-UTM-06-Download-Page.png)
 
 **What this shows:**  
 UTM successfully installed and launching on macOS.
