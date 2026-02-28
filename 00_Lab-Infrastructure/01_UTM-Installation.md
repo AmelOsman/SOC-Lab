@@ -4,57 +4,88 @@
 
 Install UTM on macOS to serve as the virtualization platform for the SOC Lab environment.
 
-This document ensures the lab environment is reproducible and standardized.
+This ensures the lab infrastructure is reproducible and standardized.
 
-## System Requirements
+## Step 1 — Navigate to Official Website
 
-- macOS (Apple Silicon or Intel)
-- Minimum 16 GB RAM recommended
-- Minimum 200 GB free disk space
-- Administrative privileges
+Open a browser and navigate to:
 
-## Step 1 — Download UTM
+https://mac.getutm.app
 
-1. Navigate to: https://mac.getutm.app
-2. Download the latest version for macOS
-3. Open the downloaded `.dmg` file
-4. Drag UTM into the Applications folder
+Download the latest macOS version.
 
-## Step 2 — Grant Permissions
+### Screenshot — UTM Website
 
-1. Open **System Settings**
-2. Navigate to:
-   Privacy & Security → Full Disk Access
-3. Ensure UTM has permission (if prompted)
+![UTM Website](Screenshots/P0-UTM-01-Website.png)
 
-## Step 3 — Initial Launch
+**What this shows:**  
+The official UTM download page.
 
-1. Open UTM from Applications
-2. Allow any macOS security prompts
-3. Confirm UTM launches successfully
+**Why this matters:**  
+Ensures virtualization software is obtained from a trusted and legitimate source.
 
-## Step 4 — Networking Standards for SOC Lab
+## Step 2 — Verify Download Completion
 
-All virtual machines will follow these network rules:
+Wait for the `.dmg` file to fully download.
 
-- Internal Network: Used for lab communication and attack simulation
-- NAT Adapter: Used only when internet access is required
-- Bridged Mode: NOT used (prevents exposure to host network)
+Confirm the file appears in your Downloads folder or on your Desktop.
 
-This ensures:
-- Safe attack simulation
-- Network segmentation
-- No exposure to home or enterprise LAN
+### Screenshot — UTM Download Complete
 
-## Validation
+![UTM Download Complete](Screenshots/P0-UTM-02-Download-Complete.png)
 
-Confirm:
-- UTM launches without error
-- You can create a new virtual machine
-- Internal network option is available
+**What this shows:**  
+The downloaded `UTM.dmg` file.
 
-## Outcome
+**Why this matters:**  
+Verifies the installer was successfully retrieved before installation.
 
-UTM is successfully installed and ready to host the multi-VM SOC lab environment.
+## Step 3 — Open UTM.dmg File
 
-This serves as the virtualization foundation for all subsequent lab phases.
+Locate the `UTM.dmg` file and double-click it.
+
+The installation window will open.
+
+### Screenshot — DMG Opened
+
+![UTM DMG Opened](Screenshots/P0-UTM-03-DMG-Opened.png)
+
+**What this shows:**  
+The UTM installation window with the application icon.
+
+**Why this matters:**  
+Mounts the installer and prepares the application for installation.
+
+## Step 4 — Drag UTM to Applications Folder
+
+Drag the UTM icon into the Applications folder shortcut in the installer window.
+
+### Screenshot — Drag to Applications
+
+![Drag to Applications](Screenshots/P0-UTM-04-Drag-Applications.png)
+
+**What this shows:**  
+UTM being moved into the macOS Applications directory.
+
+**Why this matters:**  
+Installs UTM system-wide and allows proper execution permissions.
+
+## Step 5 — Launch UTM
+
+Open Applications → Select UTM.
+
+UTM may prompt for macOS security permissions the first time it launches.
+
+### Screenshot — UTM First Launch
+
+![UTM First Launch](Screenshots/P0-UTM-05-First-Launch.png)
+
+**What this shows:**  
+UTM successfully installed and launching on macOS.
+
+**Why this matters:**  
+Confirms virtualization platform is operational before building SOC lab VMs.
+
+## Installation Complete
+
+UTM is now installed and ready for virtual machine creation.
