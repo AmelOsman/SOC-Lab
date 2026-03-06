@@ -1,7 +1,10 @@
 # Wazuh Installation Guide (Phase 1)
 
 ## Objective
-Deploy **Wazuh SIEM** on an Ubuntu 24.04 virtual machine to serve as the centralized SIEM platform for the Phase 1 SOC lab environment.
+
+Deploy **Wazuh SIEM** on an Ubuntu 24.04 virtual machine to function as the centralized security monitoring platform for the Phase 1 SOC lab environment.
+
+Wazuh is an open-source security platform used for threat detection, log analysis, intrusion detection, vulnerability monitoring, and compliance auditing.
 
 Wazuh provides:
 
@@ -11,26 +14,26 @@ Wazuh provides:
 - Log analysis
 - Security configuration assessment
 
-# Lab Environment
+## Lab Environment
 
-| Component | Value |
-|---|---|
+| Component | Configuration |
+|-----------|--------------|
 | Host System | Apple Silicon Mac |
-| Virtualization Software | UTM |
-| Virtualization Mode | Emulation |
+| Virtualization Platform | UTM |
+| VM Mode | Emulation |
 | Guest OS | Ubuntu 24.04 Desktop |
-| SIEM Platform | Wazuh |
+| SIEM Platform | Wazuh 4.7 |
 | RAM | 8 GB |
 | CPU | 4 Cores |
 | Disk | 100 GB |
 
 **Note**
 
-Because this lab was completed on **Apple Silicon**, the Ubuntu VM was created using **UTM Emulation Mode** instead of virtualization.
+Because this lab was completed on **Apple Silicon**, the Ubuntu virtual machine was created using **UTM Emulation Mode** instead of virtualization.
 
-# Lab Architecture
+## Lab Architecture
 
-```
+```text
 Apple Silicon Mac
       │
       ▼
@@ -46,47 +49,33 @@ Wazuh Manager + Indexer + Dashboard
 Wazuh Web Interface
 ```
 
-# Installation Steps
+## Installation Steps
 
-# 1. Download Ubuntu ISO
+### 1. Download Ubuntu ISO
 
 Download the Ubuntu Desktop ISO.
 
 Example file used in this lab:
 
-```
+```text
 ubuntu-24.04.4-desktop-amd64.iso
 ```
 
-📸 **Screenshot to add**
-
-```
-screenshots/ubuntu_download_page.png
-```
-
-Add screenshot in GitHub:
-
-```
 ![Ubuntu Download](screenshots/ubuntu_download_page.png)
-```
 
-# 2. Create Virtual Machine in UTM
+### 2. Create Virtual Machine in UTM
 
-Open **UTM** and select:
-
-```
-Create New Virtual Machine
-```
+Open **UTM** and create a new virtual machine.
 
 Select:
 
-```
+```text
 Emulate
 ```
 
 Then choose:
 
-```
+```text
 Linux
 ```
 
@@ -94,113 +83,79 @@ Attach the Ubuntu ISO file.
 
 VM configuration used for this lab:
 
-```
+```text
 RAM: 8192 MB
 CPU: 4 cores
 Disk: 100 GB
 Architecture: x86_64
 ```
 
-📸 **Screenshots to add**
-
-```
-screenshots/utm_create_vm.png
-screenshots/utm_emulate_mode.png
-screenshots/utm_vm_settings.png
-```
-
-Insert them in GitHub:
-
-```
 ![UTM Create VM](screenshots/utm_create_vm.png)
 
 ![UTM Emulation Mode](screenshots/utm_emulate_mode.png)
 
 ![UTM VM Settings](screenshots/utm_vm_settings.png)
-```
 
-# 3. Boot Ubuntu Installer
+### 3. Boot Ubuntu Installer
 
 Start the virtual machine.
 
-When the Ubuntu boot menu appears select:
+When the Ubuntu boot menu appears, select:
 
-```
+```text
 Try or Install Ubuntu
 ```
 
-📸 **Screenshot to add**
-
-```
-screenshots/ubuntu_boot_menu.png
-```
-
-Insert:
-
-```
 ![Ubuntu Boot Menu](screenshots/ubuntu_boot_menu.png)
-```
 
-# 4. Configure Ubuntu Installation
+### 4. Configure Ubuntu Installation
 
 Follow the Ubuntu installation wizard.
 
 Recommended selections:
 
-Language
+Language:
 
-```
+```text
 English
 ```
 
-Keyboard
+Keyboard:
 
-```
+```text
 English (US)
 ```
 
-Network
+Network:
 
-```
+```text
 Use Wired Connection
 ```
 
-Installation type
+Installation type:
 
-```
+```text
 Install Ubuntu
 ```
 
-Installation mode
+Installation mode:
 
-```
+```text
 Interactive Installation
 ```
 
-Application selection
+Application selection:
 
-```
+```text
 Default Selection
 ```
 
-Disk setup
+Disk setup:
 
-```
+```text
 Erase Disk and Install Ubuntu
 ```
 
-📸 **Screenshots to add**
-
-```
-screenshots/language_selection.png
-screenshots/keyboard_layout.png
-screenshots/network_connection.png
-screenshots/disk_setup.png
-```
-
-Insert:
-
-```
 ![Language Selection](screenshots/language_selection.png)
 
 ![Keyboard Layout](screenshots/keyboard_layout.png)
@@ -208,94 +163,54 @@ Insert:
 ![Network Connection](screenshots/network_connection.png)
 
 ![Disk Setup](screenshots/disk_setup.png)
-```
 
-# 5. Create Ubuntu User
+### 5. Create Ubuntu User
 
 Create a user account.
 
 Example configuration used in the lab:
 
-```
+```text
 Username: shadowbox
 Computer Name: wazuh-server
 Password: ********
 ```
 
-Select the correct timezone.
+Select the correct time zone.
 
 Example:
 
-```
+```text
 America / Los Angeles
 ```
 
-📸 **Screenshots to add**
-
-```
-screenshots/create_user.png
-screenshots/timezone_selection.png
-```
-
-Insert:
-
-```
 ![Create User](screenshots/create_user.png)
 
 ![Timezone Selection](screenshots/timezone_selection.png)
-```
 
-# 6. Complete Ubuntu Installation
+### 6. Complete Ubuntu Installation
 
-Ubuntu will begin copying files and installing the system.
+Ubuntu will begin copying files and installing the operating system.
 
 When installation finishes:
 
-Select
+- Select **Restart Now**
+- Remove the installation medium when prompted
+- Press **Enter** to reboot
 
-```
-Restart Now
-```
-
-Remove the installation medium when prompted.
-
-Press **Enter** to reboot.
-
-📸 **Screenshots to add**
-
-```
-screenshots/install_progress.png
-screenshots/remove_install_media.png
-```
-
-Insert:
-
-```
 ![Installation Progress](screenshots/install_progress.png)
 
 ![Remove Install Media](screenshots/remove_install_media.png)
-```
 
-# 7. Log Into Ubuntu
+### 7. Log Into Ubuntu
 
 After the system reboots, log into Ubuntu using the user account created earlier.
 
-📸 **Screenshots to add**
-
-```
-screenshots/ubuntu_login.png
-screenshots/ubuntu_desktop.png
-```
-
-Insert:
-
-```
 ![Ubuntu Login](screenshots/ubuntu_login.png)
 
 ![Ubuntu Desktop](screenshots/ubuntu_desktop.png)
-```
 
-# 8. Update System
+### 8. Update the System
 
 Open a terminal and update the system.
 
@@ -303,19 +218,11 @@ Open a terminal and update the system.
 sudo apt update && sudo apt upgrade -y
 ```
 
-📸 **Screenshot**
+This updates package repositories and installs the latest system updates.
 
-```
-screenshots/system_update.png
-```
-
-Insert:
-
-```
 ![System Update](screenshots/system_update.png)
-```
 
-# 9. Install Curl
+### 9. Install Curl
 
 Curl is required to download the Wazuh installer.
 
@@ -323,19 +230,9 @@ Curl is required to download the Wazuh installer.
 sudo apt install curl -y
 ```
 
-📸 **Screenshot**
-
-```
-screenshots/install_curl.png
-```
-
-Insert:
-
-```
 ![Install Curl](screenshots/install_curl.png)
-```
 
-# 10. Download Wazuh Installer
+### 10. Download the Wazuh Installer
 
 Download the official Wazuh installation script.
 
@@ -343,37 +240,19 @@ Download the official Wazuh installation script.
 curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
 ```
 
-📸 **Screenshot**
-
-```
-screenshots/download_wazuh_script.png
-```
-
-Insert:
-
-```
 ![Download Wazuh Script](screenshots/download_wazuh_script.png)
-```
 
-# 11. Make Installer Executable
+### 11. Make the Installer Executable
+
+Give the script execution permissions.
 
 ```bash
 chmod +x wazuh-install.sh
 ```
 
-📸 **Screenshot**
-
-```
-screenshots/chmod_script.png
-```
-
-Insert:
-
-```
 ![Make Script Executable](screenshots/chmod_script.png)
-```
 
-# 12. Run Wazuh Installer
+### 12. Run the Wazuh Installer
 
 Run the Wazuh all-in-one installer.
 
@@ -388,19 +267,9 @@ This installs:
 - Filebeat
 - Wazuh Dashboard
 
-📸 **Screenshot**
-
-```
-screenshots/wazuh_install_running.png
-```
-
-Insert:
-
-```
 ![Wazuh Installation](screenshots/wazuh_install_running.png)
-```
 
-# 13. Handle Ubuntu Compatibility Warning
+### 13. Handle Ubuntu Compatibility Warning
 
 If Ubuntu 24.04 triggers a compatibility warning, run the installer again using:
 
@@ -408,46 +277,26 @@ If Ubuntu 24.04 triggers a compatibility warning, run the installer again using:
 sudo ./wazuh-install.sh -a -i
 ```
 
-This bypasses the OS compatibility check.
+This bypasses the operating system compatibility check.
 
-📸 **Screenshot**
-
-```
-screenshots/wazuh_compatibility_warning.png
-```
-
-Insert:
-
-```
 ![Compatibility Warning](screenshots/wazuh_compatibility_warning.png)
-```
 
-# 14. Save Dashboard Credentials
+### 14. Save Dashboard Credentials
 
-At the end of installation the terminal displays dashboard credentials.
+At the end of installation, the terminal displays dashboard credentials.
 
 Example output:
 
-```
+```text
 User: admin
 Password: <generated password>
 ```
 
-Save the password.
+Save the password because it is required to access the Wazuh dashboard.
 
-📸 **Screenshot**
-
-```
-screenshots/wazuh_credentials.png
-```
-
-Insert:
-
-```
 ![Wazuh Credentials](screenshots/wazuh_credentials.png)
-```
 
-# 15. Find Server IP Address
+### 15. Find the Server IP Address
 
 Run:
 
@@ -455,84 +304,65 @@ Run:
 ip a
 ```
 
-Locate the active network interface.
+Locate the active network interface and identify the assigned IPv4 address.
 
 Example:
 
-```
+```text
 192.168.64.15
 ```
 
-📸 **Screenshot**
-
-```
-screenshots/ip_address_command.png
-```
-
-Insert:
-
-```
 ![IP Address](screenshots/ip_address_command.png)
-```
 
-# 16. Access Wazuh Dashboard
+### 16. Access the Wazuh Dashboard
 
 Open a browser and navigate to:
 
-```
+```text
 https://<server-ip>
 ```
 
 Example:
 
-```
+```text
 https://192.168.64.15
 ```
 
-If the browser warns about a certificate:
+Because Wazuh uses a self-signed certificate, the browser may display a warning.
 
-```
+Select:
+
+```text
 Advanced → Proceed
 ```
 
-📸 **Screenshot**
-
-```
-screenshots/wazuh_login_page.png
-```
-
-Insert:
-
-```
 ![Wazuh Login](screenshots/wazuh_login_page.png)
-```
 
-# 17. Log Into Wazuh
+### 17. Log Into Wazuh
 
 Enter the credentials generated during installation.
 
-```
+```text
 Username: admin
 Password: <generated password>
 ```
 
-The Wazuh dashboard will load.
+The Wazuh dashboard will load after successful authentication.
 
-📸 **Screenshot**
-
-```
-screenshots/wazuh_dashboard.png
-```
-
-Insert:
-
-```
 ![Wazuh Dashboard](screenshots/wazuh_dashboard.png)
-```
 
-# Verification
+## Wazuh Components Installed
 
-Successful installation displays the Wazuh dashboard modules:
+The Wazuh installation script deploys the following components:
+
+- **Wazuh Manager** – Processes and analyzes security events
+- **Wazuh Indexer** – Stores security logs and indexed events
+- **Filebeat** – Forwards logs to the indexer
+- **Wazuh Dashboard** – Provides the web interface for monitoring and analysis
+
+## Verification
+
+A successful installation displays the Wazuh dashboard modules, including:
 
 - Security Events
 - Integrity Monitoring
@@ -542,19 +372,19 @@ Successful installation displays the Wazuh dashboard modules:
 
 Initially the dashboard will show:
 
-```
+```text
 Total Agents: 0
 ```
 
-This is expected until agents are added.
+This is expected until monitored endpoints are added to the Wazuh manager.
 
-# Result
+## Result
 
 The Wazuh SIEM platform has been successfully deployed and is ready to monitor endpoints within the SOC lab environment.
 
 Future steps include:
 
 - Installing Wazuh agents
-- Connecting endpoints
+- Connecting endpoints to the manager
 - Generating security alerts
 - Monitoring logs and security events
