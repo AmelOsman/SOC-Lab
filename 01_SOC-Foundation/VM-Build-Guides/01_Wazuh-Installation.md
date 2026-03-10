@@ -226,8 +226,6 @@ When installation finishes:
 
 ![Ubuntu Installation Complete Restart](installation-screenshots/wazuh/25_ubuntu_installation_complete_restart.png)
 
-![Ubuntu Remove Installation Medium](installation-screenshots/wazuh/26_ubuntu_remove_installation_medium.png)
-
 ![Ubuntu Login Screen](installation-screenshots/wazuh/27_ubuntu_login_screen.png)
 
 ### 7. Log Into Ubuntu
