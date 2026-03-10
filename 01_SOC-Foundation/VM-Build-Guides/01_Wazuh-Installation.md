@@ -16,16 +16,16 @@ Wazuh provides:
 
 ## Lab Environment
 
-| Component             | Configuration          |
-|-----------------------|------------------------|
-| Host System           | Apple Silicon Mac      |
-| Virtualization Platform | UTM                  |
-| VM Mode               | Emulation              |
-| Guest OS              | Ubuntu 24.04 Desktop   |
-| SIEM Platform         | Wazuh 4.7              |
-| RAM                   | 8 GB                   |
-| CPU                   | 4 Cores                |
-| Disk                  | 100 GB                 |
+| Component               | Configuration                       |
+|-------------------------|-------------------------------------|
+| Host System             | Apple Silicon Mac                   |
+| Virtualization Platform | UTM                                 |
+| VM Mode                 | Emulation                           |
+| Guest OS                | Ubuntu 24.04 Desktop                |
+| SIEM Platform           | Wazuh 4.7 (see Step 11 for latest)  |
+| RAM                     | 8 GB                                |
+| CPU                     | 4 Cores                             |
+| Disk                    | 100 GB                              |
 
 > **Note:** Because this lab was completed on **Apple Silicon**, the Ubuntu virtual machine was created using **UTM Emulation Mode** instead of virtualization.
 
@@ -255,6 +255,18 @@ DNS:      8.8.8.8
 
 > **Note:** Use an address outside your router's DHCP range to avoid conflicts. The correct gateway and subnet will depend on your UTM network configuration.
 
+After saving, restart the network manager to apply the change immediately:
+
+```bash
+sudo systemctl restart NetworkManager
+```
+
+Verify the new address is active before proceeding:
+
+```bash
+ip a
+```
+
 ### 9. Update the System
 
 Open a terminal and update the system.
@@ -422,12 +434,12 @@ This is expected — no endpoints have been connected yet. Agents will be added 
 
 The Wazuh SIEM platform has been successfully deployed with the following components installed and running:
 
-| Component         | Role                                              |
-|-------------------|---------------------------------------------------|
-| Wazuh Manager     | Processes and analyzes security events            |
-| Wazuh Indexer     | Stores security logs and indexed events           |
-| Filebeat          | Forwards logs to the indexer                      |
-| Wazuh Dashboard   | Web interface for monitoring and analysis         |
+| Component       | Role                                           |
+|-----------------|------------------------------------------------|
+| Wazuh Manager   | Processes and analyzes security events         |
+| Wazuh Indexer   | Stores security logs and indexed events        |
+| Filebeat        | Forwards logs to the indexer                   |
+| Wazuh Dashboard | Web interface for monitoring and analysis      |
 
 The dashboard modules available include Security Events, Integrity Monitoring, Policy Monitoring, System Auditing, and Security Configuration Assessment.
 
