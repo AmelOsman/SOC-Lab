@@ -228,17 +228,17 @@ When installation finishes:
 
 ![Ubuntu Installation Complete Restart](installation-screenshots/wazuh/25_ubuntu_installation_complete_restart.png)
 
-![Ubuntu Remove Installation Media](installation-screenshots/wazuh/26_ubuntu_remove_installation_media.png)
-
 ### 7. Log Into Ubuntu
 
 After the system reboots, log into Ubuntu using the user account created earlier.
 
 Once logged in, complete the first-boot welcome screen.
 
-![Ubuntu Login Screen](installation-screenshots/wazuh/27_ubuntu_login_screen.png)
+![Ubuntu Login Screen](installation-screenshots/wazuh/26_ubuntu_remove_installation_media.png)
 
-![Ubuntu First Boot Welcome](installation-screenshots/wazuh/28_ubuntu_first_boot_welcome.png)
+![Ubuntu First Boot Welcome](installation-screenshots/wazuh/27_ubuntu_login_screen.png)
+
+![Ubuntu Desktop Welcome](installation-screenshots/wazuh/28_ubuntu_first_boot_welcome.png)
 
 ### 8. Update the System
 
