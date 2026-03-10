@@ -16,20 +16,18 @@ Wazuh provides:
 
 ## Lab Environment
 
-| Component | Configuration |
-|-----------|--------------|
-| Host System | Apple Silicon Mac |
-| Virtualization Platform | UTM |
-| VM Mode | Emulation |
-| Guest OS | Ubuntu 24.04 Desktop |
-| SIEM Platform | Wazuh 4.7 |
-| RAM | 8 GB |
-| CPU | 4 Cores |
-| Disk | 100 GB |
+| Component             | Configuration          |
+|-----------------------|------------------------|
+| Host System           | Apple Silicon Mac      |
+| Virtualization Platform | UTM                  |
+| VM Mode               | Emulation              |
+| Guest OS              | Ubuntu 24.04 Desktop   |
+| SIEM Platform         | Wazuh 4.7              |
+| RAM                   | 8 GB                   |
+| CPU                   | 4 Cores                |
+| Disk                  | 100 GB                 |
 
-**Note**
-
-Because this lab was completed on **Apple Silicon**, the Ubuntu virtual machine was created using **UTM Emulation Mode** instead of virtualization.
+> **Note:** Because this lab was completed on **Apple Silicon**, the Ubuntu virtual machine was created using **UTM Emulation Mode** instead of virtualization.
 
 ## Lab Architecture
 
@@ -228,8 +226,9 @@ When installation finishes:
 
 ![Ubuntu Installation Complete Restart](installation-screenshots/wazuh/25_ubuntu_installation_complete_restart.png)
 
-![Ubuntu First Boot Welcome](installation-screenshots/wazuh/27_ubuntu_login_screen.png)
+![Ubuntu Remove Installation Medium](installation-screenshots/wazuh/26_ubuntu_remove_installation_medium.png)
 
+![Ubuntu Login Screen](installation-screenshots/wazuh/27_ubuntu_login_screen.png)
 
 ### 7. Log Into Ubuntu
 
@@ -239,7 +238,24 @@ Once logged in, complete the first-boot welcome screen.
 
 ![Ubuntu Desktop Welcome](installation-screenshots/wazuh/28_ubuntu_first_boot_welcome.png)
 
-### 8. Update the System
+### 8. Configure a Static IP Address
+
+Before installing Wazuh, assign a static IP address to the VM. A DHCP-assigned address can change on reboot, which would break access to the Wazuh dashboard.
+
+Open **Settings → Network**, select the active wired connection, and assign a static IPv4 address.
+
+Example configuration:
+
+```text
+Address:  192.168.64.15
+Netmask:  255.255.255.0
+Gateway:  192.168.64.1
+DNS:      8.8.8.8
+```
+
+> **Note:** Use an address outside your router's DHCP range to avoid conflicts. The correct gateway and subnet will depend on your UTM network configuration.
+
+### 9. Update the System
 
 Open a terminal and update the system.
 
@@ -253,19 +269,21 @@ This updates package repositories and installs the latest system updates.
 
 ![Ubuntu System Update Command](installation-screenshots/wazuh/30_ubuntu_system_update_command.png)
 
-### 9. Install Curl
+### 10. Verify curl Is Installed
 
-Curl is required to download the Wazuh installer.
+`curl` is required to download the Wazuh installer. Ubuntu 24.04 Desktop typically includes it by default. Verify it is available, and install it if not.
 
 ```bash
-sudo apt install curl -y
+curl --version || sudo apt install curl -y
 ```
 
 ![Install Curl Dependency](installation-screenshots/wazuh/31_install_curl_dependency.png)
 
-### 10. Download the Wazuh Installer
+### 11. Download the Wazuh Installer
 
 Download the official Wazuh installation script.
+
+> **Note:** The URL below references Wazuh **4.7**, which was the version used in this lab. Check the [official Wazuh documentation](https://documentation.wazuh.com/current/installation-guide/index.html) for the latest version and update the URL accordingly before running the command.
 
 ```bash
 curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
@@ -273,21 +291,12 @@ curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
 
 ![Download Wazuh Install Script](installation-screenshots/wazuh/32_download_wazuh_install_script.png)
 
-### 11. Make the Installer Executable
+### 12. Make the Installer Executable and Run It
 
-Give the script execution permissions.
+Give the script execution permissions, then run the Wazuh all-in-one installer.
 
 ```bash
 chmod +x wazuh-install.sh
-```
-
-![Make Wazuh Script Executable](installation-screenshots/wazuh/33_make_wazuh_script_executable.png)
-
-### 12. Run the Wazuh Installer
-
-Run the Wazuh all-in-one installer.
-
-```bash
 sudo ./wazuh-install.sh -a
 ```
 
@@ -321,11 +330,28 @@ User: admin
 Password: <generated password>
 ```
 
-Save the password because it is required to access the Wazuh dashboard.
+Save the password — it is required to access the Wazuh dashboard and cannot be recovered after closing the terminal.
 
 ![Wazuh Installation Complete Credentials](installation-screenshots/wazuh/36_wazuh_installation_complete_credentials.png)
 
-### 14. Find the Server IP Address
+### 14. Confirm Firewall Status
+
+Ubuntu 24.04 Desktop ships with `ufw` inactive by default. If `ufw` has been enabled, ensure the following ports are open so the dashboard and agents can communicate:
+
+```bash
+sudo ufw allow 443/tcp    # Wazuh Dashboard (HTTPS)
+sudo ufw allow 1514/tcp   # Wazuh agent communication
+sudo ufw allow 1515/tcp   # Wazuh agent enrollment
+sudo ufw reload
+```
+
+To check the current firewall status:
+
+```bash
+sudo ufw status
+```
+
+### 15. Find the Server IP Address
 
 Run:
 
@@ -333,7 +359,7 @@ Run:
 ip a
 ```
 
-Locate the active network interface and identify the assigned IPv4 address.
+Locate the active network interface and confirm the static IPv4 address assigned in Step 8 is active.
 
 Example:
 
@@ -343,7 +369,7 @@ Example:
 
 ![Check System IP Address](installation-screenshots/wazuh/37_check_system_ip_address.png)
 
-### 15. Access the Wazuh Dashboard
+### 16. Access the Wazuh Dashboard
 
 Open a browser and navigate to:
 
@@ -357,7 +383,7 @@ Example:
 https://192.168.64.15
 ```
 
-Because Wazuh uses a self-signed certificate, the browser may display a warning.
+Because Wazuh uses a self-signed certificate, the browser may display a security warning.
 
 Select:
 
@@ -367,7 +393,7 @@ Advanced → Proceed
 
 ![Access Wazuh Dashboard URL](installation-screenshots/wazuh/38_access_wazuh_dashboard_url.png)
 
-### 16. Log Into Wazuh
+### 17. Log Into Wazuh
 
 Enter the credentials generated during installation.
 
@@ -376,46 +402,34 @@ Username: admin
 Password: <generated password>
 ```
 
-The Wazuh login page should appear first, followed by the dashboard after successful authentication.
-
 ![Wazuh Login Page](installation-screenshots/wazuh/39_wazuh_login_page.png)
 
-### 17. Verify Dashboard Access
+### 18. Verify Dashboard Access
 
 After successful authentication, the Wazuh dashboard loads and displays the monitoring interface.
 
-![Wazuh Dashboard Overview](installation-screenshots/wazuh/40_wazuh_dashboard_overview.png)
-
-## Wazuh Components Installed
-
-The Wazuh installation script deploys the following components:
-
-- **Wazuh Manager** – Processes and analyzes security events
-- **Wazuh Indexer** – Stores security logs and indexed events
-- **Filebeat** – Forwards logs to the indexer
-- **Wazuh Dashboard** – Provides the web interface for monitoring and analysis
-
-## Verification
-
-A successful installation displays the Wazuh dashboard modules, including:
-
-- Security Events
-- Integrity Monitoring
-- Policy Monitoring
-- System Auditing
-- Security Configuration Assessment
-
-Initially the dashboard will show:
+The dashboard will show:
 
 ```text
 Total Agents: 0
 ```
 
-This is expected until monitored endpoints are added to the Wazuh manager.
+This is expected — no endpoints have been connected yet. Agents will be added in a later phase.
+
+![Wazuh Dashboard Overview](installation-screenshots/wazuh/40_wazuh_dashboard_overview.png)
 
 ## Result
 
-The Wazuh SIEM platform has been successfully deployed and is ready to monitor endpoints within the SOC lab environment.
+The Wazuh SIEM platform has been successfully deployed with the following components installed and running:
+
+| Component         | Role                                              |
+|-------------------|---------------------------------------------------|
+| Wazuh Manager     | Processes and analyzes security events            |
+| Wazuh Indexer     | Stores security logs and indexed events           |
+| Filebeat          | Forwards logs to the indexer                      |
+| Wazuh Dashboard   | Web interface for monitoring and analysis         |
+
+The dashboard modules available include Security Events, Integrity Monitoring, Policy Monitoring, System Auditing, and Security Configuration Assessment.
 
 Future steps include:
 
