@@ -2,55 +2,63 @@
 
 ## Overview
 
-This phase establishes a foundational Security Operations Center (SOC) lab built using UTM on macOS. The objective is to deploy a centralized SIEM platform, simulate attack activity, and analyze generated alerts within a structured multi-VM environment.
+Phase 1 establishes a foundational Security Operations Center (SOC) lab built in UTM on macOS. The purpose of this phase is to deploy a centralized Wazuh SIEM, simulate attacker activity, and analyze generated alerts across a structured multi-VM environment. This lab provides hands-on practice with endpoint visibility, log collection, alert analysis, and basic detection workflows.
 
 ## Virtual Machine Roles
 
 | Role | Operating System | Purpose |
 |------|------------------|----------|
-| 🛡 SOC / SIEM | Security Onion | Centralized log collection, alerting, and investigation |
+| 🛡 SOC / SIEM | Ubuntu Desktop with Wazuh | Centralized log collection, alerting, and investigation |
 | 🏗 Infrastructure | Windows Server 2025 | Enterprise services and Active Directory foundation |
-| 🖥 Endpoint 1 | Windows 11 | Primary enterprise workstation |
-| 🖥 Endpoint 2 | Ubuntu 22.04 | Linux endpoint monitoring |
-| 🔴 Attacker | Kali Linux | Attack simulation (Nmap, Metasploit) |
-| 🧨 Vulnerable Target | Metasploitable 2 | Exploitation testing target |
-| 📋 Documentation | Notion / Spreadsheet | Incident tracking and investigation workflow |
+| 🖥 Endpoint 1 | Windows 11 | Primary enterprise workstation with Sysmon and Wazuh agent |
+| 🖥 Endpoint 2 | Ubuntu 22.04 | Linux endpoint for log monitoring and agent-based visibility |
+| 🔴 Attacker | Kali Linux | Attack simulation using reconnaissance and exploitation tools |
+| 🧨 Vulnerable Target | Metasploitable 2 | Intentionally vulnerable target for testing detections |
+| 📋 Documentation | Notion / Spreadsheet | Alert tracking, investigation notes, and incident workflow documentation |
 
 ## Objectives
 
-- Deploy Security Onion in Evaluation Mode
-- Configure dual NIC architecture
-- Validate log ingestion from endpoints
-- Simulate reconnaissance and exploitation
-- Analyze SIEM alerts
-- Document findings in structured incident reports
+- Deploy Wazuh as the centralized SIEM platform
+- Build and configure the Phase 1 multi-VM SOC lab in UTM
+- Install Sysmon on Windows 11 for enhanced endpoint telemetry
+- Connect Windows and Linux endpoints to Wazuh
+- Validate log ingestion and alert generation
+- Simulate reconnaissance and exploitation activity
+- Analyze alerts and document findings in structured incident reports
 
 ## Skills Demonstrated
 
-- SIEM deployment and configuration
-- Enterprise VM architecture planning
-- Network segmentation
-- Attack simulation
-- Alert analysis
+- Wazuh deployment and configuration
+- Multi-VM SOC lab architecture
+- Endpoint monitoring and telemetry collection
+- Sysmon installation and Windows event visibility
+- Linux log monitoring
+- Attack simulation and basic adversary emulation
+- Alert investigation and validation
 - Incident documentation
 - MITRE ATT&CK mapping
 
 ## Environment Architecture
 
-Security Onion is configured with:
+Wazuh is deployed on an Ubuntu Desktop virtual machine and serves as the central monitoring platform for the lab. Windows and Linux endpoints are configured to forward relevant telemetry to Wazuh for analysis and alerting.
 
-- NIC 1: Management / Internet
-- NIC 2: Internal Monitoring Network
+The Phase 1 environment includes:
 
-All endpoints reside on the internal network to ensure monitored traffic visibility.
+- A central Wazuh server for visibility and alert analysis
+- A Windows 11 endpoint configured with Sysmon and the Wazuh agent
+- An Ubuntu 22.04 endpoint for Linux monitoring
+- A Windows Server 2025 system for infrastructure testing
+- A Kali Linux attacker VM for reconnaissance and exploitation
+- A Metasploitable 2 target for vulnerable service testing
+
+All systems are placed within the lab environment to support controlled monitoring, attack simulation, and alert generation.
 
 ## Attack Simulations
 
 - Nmap port scanning
 - Service enumeration
 - Metasploit exploitation testing
-- Alert validation in Security Onion
-
+- Alert validation in Wazuh
 
 ## Repository Structure
 
@@ -61,6 +69,6 @@ All endpoints reside on the internal network to ensure monitored traffic visibil
 
 ## Next Phase
 
-Phase 2 expands this lab into a full enterprise environment including domain-joined endpoints, credential attacks, lateral movement detection, and detection engineering.
+Phase 2 expands this lab into a more advanced enterprise detection environment with domain-connected systems, credential attack scenarios, lateral movement detection, and deeper detection engineering workflows.
 
-This phase establishes the technical foundation for enterprise-level detection engineering and blue team operations.
+This phase builds the foundation for enterprise-level SOC operations, blue team analysis, and detection engineering practice.
