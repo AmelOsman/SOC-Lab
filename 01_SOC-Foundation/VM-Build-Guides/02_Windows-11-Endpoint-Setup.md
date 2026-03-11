@@ -343,7 +343,7 @@ The `Sysmon` folder will now appear at the root of `C:\`.
 
 ![File Explorer — Sysmon Folder Created](installation-screenshots/windows11-endpoint/40-file-explorer-c-sysmon-folder.png)
 
-### Move the ZIP to C:\Sysmon
+### Move the ZIP to `C:\Sysmon`
 
 Move `SysinternalsSuite-ARM64.zip` from your Downloads folder into `C:\Sysmon`.
 
@@ -351,10 +351,9 @@ Move `SysinternalsSuite-ARM64.zip` from your Downloads folder into `C:\Sysmon`.
 
 ### Open PowerShell as Administrator
 
-Right-click the **Start** button and select **Terminal (Admin)**, or search for **PowerShell**, right-click, and choose **Run as administrator**.
+Right-click the **Start** button and select **Terminal (Admin)**, or search for **PowerShell**, right-click it, and choose **Run as administrator**.
 
 Navigate to `C:\Sysmon`:
-
 ```powershell
 cd C:\Sysmon
 ```
@@ -364,7 +363,6 @@ cd C:\Sysmon
 ### Extract the Archive
 
 Run `dir` to confirm the ZIP is present, then extract it:
-
 ```powershell
 dir
 Expand-Archive -Path .\SysinternalsSuite-ARM64.zip -DestinationPath .\SysinternalsSuite-ARM64
@@ -373,7 +371,6 @@ Expand-Archive -Path .\SysinternalsSuite-ARM64.zip -DestinationPath .\Sysinterna
 ![PowerShell — dir and Expand-Archive](installation-screenshots/windows11-endpoint/43-powershell-dir-expand-archive.png)
 
 ### Navigate into the Extracted Folder
-
 ```powershell
 cd .\SysinternalsSuite-ARM64
 ```
@@ -383,7 +380,6 @@ Your prompt will now show `PS C:\Sysmon\SysinternalsSuite-ARM64>`.
 ![PowerShell — cd SysinternalsSuite-ARM64](installation-screenshots/windows11-endpoint/44-powershell-cd-sysinternals-suite.png)
 
 ### Confirm Sysmon64a.exe is Present
-
 ```powershell
 dir Sysmon*
 ```
@@ -395,13 +391,11 @@ You should see `Sysmon64a.exe` listed in the directory.
 ### Run the Installer
 
 Run the installer with the `-accepteula` and `-i` flags to accept the license agreement and install with default settings:
-
 ```powershell
 .\Sysmon64a.exe -accepteula -i
 ```
 
 A successful installation will output:
-
 ```
 System Monitor v15.15 - System activity monitor
 Sysmon64a installed.
@@ -415,13 +409,11 @@ Sysmon64a started.
 ![PowerShell — Sysmon Install Output](installation-screenshots/windows11-endpoint/46-powershell-sysmon-install.png)
 
 ### Verify the Service is Running
-
 ```powershell
 Get-Service *sysmon*
 ```
 
 Expected output:
-
 ```
 Status   Name       DisplayName
 ------   ----       -----------
@@ -449,7 +441,7 @@ Running  Sysmon64a  Sysmon64a
 | `Expand-Archive` fails | Confirm the ZIP is in `C:\Sysmon` and the path in the command is correct |
 | Sysmon install fails — access denied | Confirm PowerShell is running as **Administrator** |
 | Sysmon service shows Stopped | Run `Start-Service Sysmon64a` to start it manually |
-| Verify Sysmon logs are writing | Open **Event Viewer** → `Applications and Services Logs > Microsoft > Windows > Sysmon > Operational` |
+| Verify Sysmon logs are being written | Open **Event Viewer** → `Applications and Services Logs > Microsoft > Windows > Sysmon > Operational` |
 
 ---
 
