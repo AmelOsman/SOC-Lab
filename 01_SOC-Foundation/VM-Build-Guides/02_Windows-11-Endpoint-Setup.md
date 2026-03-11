@@ -4,8 +4,6 @@
 **Role:** Monitored Enterprise Workstation  
 **Path:** `SOC-Lab / 01_SOC-Foundation / VM-Build-Guides`
 
----
-
 ## Table of Contents
 
 - [VM Specifications](#vm-specifications)
@@ -25,8 +23,6 @@
 - [Step 14 — Install Sysmon](#step-14--install-sysmon)
 - [Tips & Troubleshooting](#tips--troubleshooting)
 
----
-
 ## VM Specifications
 
 | Setting | Value |
@@ -39,8 +35,6 @@
 | Display | VGA |
 | SPICE Tools | Installed |
 | Operating System | Windows 11 Pro |
-
----
 
 ## Step 1 — Download the Windows 11 ARM64 ISO
 
@@ -64,8 +58,6 @@ Confirm `Win11_25H2_English_Arm64.iso` is in your Downloads folder.
 
 ![Downloads Folder](installation-screenshots/windows11-endpoint/05-downloads-windows11-iso.png)
 
----
-
 ## Step 2 — Create a New VM in UTM
 
 Open UTM and click **+** to create a new virtual machine. Select **Virtualize** — this is faster and runs the native ARM64 architecture.
@@ -74,15 +66,11 @@ Open UTM and click **+** to create a new virtual machine. Select **Virtualize** 
 
 ![UTM Start — Virtualize vs Emulate](installation-screenshots/windows11-endpoint/06-utm-start-virtualize-emulate.png)
 
----
-
 ## Step 3 — Select the Operating System
 
 On the Operating System screen, select **Windows**.
 
 ![UTM Select Operating System](installation-screenshots/windows11-endpoint/07-utm-select-operating-system.png)
-
----
 
 ## Step 4 — Configure the Windows Image
 
@@ -92,8 +80,6 @@ On the Operating System screen, select **Windows**.
 - Click **Continue**
 
 ![UTM Windows Image — ISO and SPICE](installation-screenshots/windows11-endpoint/09-utm-windows-image-iso-spice.png)
-
----
 
 ## Step 5 — Set Hardware Resources
 
@@ -108,8 +94,6 @@ On the Operating System screen, select **Windows**.
 
 Click **Continue**.
 
----
-
 ## Step 6 — Configure Storage
 
 Set the virtual disk size to **64 GiB** (default). Click **Continue**.
@@ -118,15 +102,11 @@ Set the virtual disk size to **64 GiB** (default). Click **Continue**.
 
 ![UTM Storage — 64 GiB](installation-screenshots/windows11-endpoint/10-utm-storage-64gb.png)
 
----
-
 ## Step 7 — Shared Directory (Optional)
 
 Optionally link a folder on your Mac to make it accessible inside the Windows VM. Click **Browse...** to select one, or leave it blank and click **Continue** to skip.
 
 ![UTM Shared Directory](installation-screenshots/windows11-endpoint/11-utm-shared-directory.png)
-
----
 
 ## Step 8 — Review the Summary
 
@@ -145,8 +125,6 @@ Review all settings before saving. Rename the VM if desired, then click **Save**
 
 ![UTM Summary](installation-screenshots/windows11-endpoint/12-utm-summary-review.png)
 
----
-
 ## Step 9 — Start the VM
 
 Select the Windows 11 VM in the UTM sidebar and click the **Play (▶)** button.
@@ -154,8 +132,6 @@ Select the Windows 11 VM in the UTM sidebar and click the **Play (▶)** button.
 > 💡 The screen may stay black for 30–60 seconds while the virtual hardware initializes — this is normal.
 
 ![UTM VM Ready — Play Button](installation-screenshots/windows11-endpoint/13-utm-vm-ready-play.png)
-
----
 
 ## Step 10 — Windows Setup Wizard
 
@@ -195,8 +171,6 @@ Select **Disk 0 Unallocated Space** (64.0 GB) and click **Next**.
 
 ![Windows Setup — Select Disk](installation-screenshots/windows11-endpoint/19-windows-setup-select-disk.png)
 
----
-
 ## Step 11 — Installation Progress
 
 Windows will begin copying and installing files to the virtual disk.
@@ -208,8 +182,6 @@ After the first restart, a black screen will appear showing **Installing 0% — 
 > ⚠️ Do NOT close UTM or shut down your Mac during installation. The process takes 10–20 minutes. Windows will restart 2–3 times automatically.
 
 ![Windows Restart — Installing 0%](installation-screenshots/windows11-endpoint/21-windows-restart-installing-0-percent.png)
-
----
 
 ## Step 12 — Eject the ISO & Complete OOBE Setup
 
@@ -247,8 +219,6 @@ Windows will show a loading screen while finishing configuration.
 ![OOBE — Good Things Coming](installation-screenshots/windows11-endpoint/27-oobe-loading-good-things.png)
 
 > 💡 You may also be prompted to sign in with a Microsoft account, set a PIN, and configure privacy settings.
-
----
 
 ## Step 13 — Install UTM Guest Tools
 
@@ -306,8 +276,6 @@ Now that the Guest Tools are installed, eject the UTM Guest Tools ISO from the U
 > 💡 After ejecting, the CD/DVD entry will show as `none`, confirming it has been removed.
 
 ![UTM — Eject Guest Tools ISO](installation-screenshots/windows11-endpoint/36-utm-eject-guest-tools.png)
-
----
 
 ## Step 14 — Install Sysmon
 
@@ -422,11 +390,7 @@ Running  Sysmon64a  Sysmon64a
 
 ![PowerShell — Get-Service Sysmon Running](installation-screenshots/windows11-endpoint/47-powershell-get-service-sysmon.png)
 
----
-
 ✅ **Windows 11 is fully installed, configured, and Sysmon is running on the endpoint.**
-
----
 
 ## Tips & Troubleshooting
 
@@ -442,8 +406,6 @@ Running  Sysmon64a  Sysmon64a
 | Sysmon install fails — access denied | Confirm PowerShell is running as **Administrator** |
 | Sysmon service shows Stopped | Run `Start-Service Sysmon64a` to start it manually |
 | Verify Sysmon logs are being written | Open **Event Viewer** → `Applications and Services Logs > Microsoft > Windows > Sysmon > Operational` |
-
----
 
 > For more help with UTM, visit [docs.getutm.app/guides/windows](https://docs.getutm.app/guides/windows)  
 > For Sysmon configuration and advanced usage, visit [learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
