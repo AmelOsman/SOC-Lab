@@ -164,7 +164,7 @@ Select your **Language to install** and **Time and currency format**, then click
 
 ![Windows Setup — Language](installation-screenshots/windows11-endpoint/14-windows-setup-language.png)
 
-Confirm your **Keyboard or input method** (e.g. US), then click **Next**.
+Confirm your **Keyboard or input method** (e.g., US), then click **Next**.
 
 ![Windows Setup — Keyboard](installation-screenshots/windows11-endpoint/15-windows-setup-keyboard.png)
 
@@ -233,7 +233,7 @@ Windows will boot to the Windows logo screen before launching the OOBE wizard.
 
 ![OOBE — Country Region](installation-screenshots/windows11-endpoint/24-oobe-country-region.png)
 
-**Keyboard Layout** — Confirm your keyboard layout (e.g. US) and click **Yes**.
+**Keyboard Layout** — Confirm your keyboard layout (e.g., US) and click **Yes**.
 
 ![OOBE — Keyboard Layout](installation-screenshots/windows11-endpoint/25-oobe-keyboard-layout.png)
 
@@ -261,7 +261,7 @@ Click the **File Explorer** icon in the taskbar.
 
 ![Windows 11 Desktop — Taskbar](installation-screenshots/windows11-endpoint/29-windows11-desktop-taskbar.png)
 
-Click **This PC** in the sidebar. You will see three drives listed under Devices and drives:
+Click **This PC** in the sidebar. You will see three drives listed under **Devices and drives**:
 
 | Drive | Description |
 |---|---|
@@ -308,7 +308,7 @@ Now that the Guest Tools are installed, eject the UTM Guest Tools ISO from the U
 
 ---
 
-## ✅ Windows 11 is now fully installed and ready to use!
+✅ **Windows 11 is now fully installed and ready to use!**
 
 ---
 
