@@ -327,75 +327,81 @@ In Edge, navigate to [learn.microsoft.com/en-us/sysinternals/downloads](https://
 
 > 💡 This is the correct download for Apple Silicon Macs running Windows 11 ARM64 in UTM. Do not download the standard x64 suite.
 
-![Sysinternals Downloads Page](installation-screenshots/sysmon/37-sysinternals-downloads-page.png)
+![Sysinternals Downloads Page](installation-screenshots/windows11-endpoint/37-sysinternals-downloads-page.png)
 
 Confirm `SysinternalsSuite-ARM64.zip` appears in the Edge downloads bar.
 
-![Edge Downloads — SysinternalsSuite-ARM64.zip](installation-screenshots/sysmon/38-edge-downloads-sysinternals-zip.png)
+![Edge Downloads — SysinternalsSuite-ARM64.zip](installation-screenshots/windows11-endpoint/38-edge-downloads-sysinternals-zip.png)
 
 ### Create the Sysmon Directory
 
 Open **File Explorer** and navigate to **Local Disk (C:)**. Right-click in the file list and select **New > Folder**. Name the folder `Sysmon`.
 
-![File Explorer — New Folder](installation-screenshots/sysmon/39-file-explorer-c-new-folder.png)
+![File Explorer — New Folder](installation-screenshots/windows11-endpoint/39-file-explorer-c-new-folder.png)
 
 The `Sysmon` folder will now appear at the root of `C:\`.
 
-![File Explorer — Sysmon Folder Created](installation-screenshots/sysmon/40-file-explorer-c-sysmon-folder.png)
+![File Explorer — Sysmon Folder Created](installation-screenshots/windows11-endpoint/40-file-explorer-c-sysmon-folder.png)
 
 ### Move the ZIP to C:\Sysmon
 
 Move `SysinternalsSuite-ARM64.zip` from your Downloads folder into `C:\Sysmon`.
 
-![File Explorer — ZIP in Sysmon Folder](installation-screenshots/sysmon/41-file-explorer-sysmon-zip.png)
+![File Explorer — ZIP in Sysmon Folder](installation-screenshots/windows11-endpoint/41-file-explorer-sysmon-zip.png)
 
 ### Open PowerShell as Administrator
 
 Right-click the **Start** button and select **Terminal (Admin)**, or search for **PowerShell**, right-click, and choose **Run as administrator**.
 
 Navigate to `C:\Sysmon`:
+
 ```powershell
 cd C:\Sysmon
 ```
 
-![PowerShell Admin — cd C:\Sysmon](installation-screenshots/sysmon/42-powershell-admin-cd-sysmon.png)
+![PowerShell Admin — cd C:\Sysmon](installation-screenshots/windows11-endpoint/42-powershell-admin-cd-sysmon.png)
 
 ### Extract the Archive
 
 Run `dir` to confirm the ZIP is present, then extract it:
+
 ```powershell
 dir
 Expand-Archive -Path .\SysinternalsSuite-ARM64.zip -DestinationPath .\SysinternalsSuite-ARM64
 ```
 
-![PowerShell — dir and Expand-Archive](installation-screenshots/sysmon/43-powershell-dir-expand-archive.png)
+![PowerShell — dir and Expand-Archive](installation-screenshots/windows11-endpoint/43-powershell-dir-expand-archive.png)
 
 ### Navigate into the Extracted Folder
+
 ```powershell
 cd .\SysinternalsSuite-ARM64
 ```
 
 Your prompt will now show `PS C:\Sysmon\SysinternalsSuite-ARM64>`.
 
-![PowerShell — cd SysinternalsSuite-ARM64](installation-screenshots/sysmon/44-powershell-cd-sysinternals-suite.png)
+![PowerShell — cd SysinternalsSuite-ARM64](installation-screenshots/windows11-endpoint/44-powershell-cd-sysinternals-suite.png)
 
 ### Confirm Sysmon64a.exe is Present
+
 ```powershell
 dir Sysmon*
 ```
 
 You should see `Sysmon64a.exe` listed in the directory.
 
-![PowerShell — dir Sysmon*](installation-screenshots/sysmon/45-powershell-dir-sysmon-exe.png)
+![PowerShell — dir Sysmon*](installation-screenshots/windows11-endpoint/45-powershell-dir-sysmon-exe.png)
 
 ### Run the Installer
 
 Run the installer with the `-accepteula` and `-i` flags to accept the license agreement and install with default settings:
+
 ```powershell
 .\Sysmon64a.exe -accepteula -i
 ```
 
 A successful installation will output:
+
 ```
 System Monitor v15.15 - System activity monitor
 Sysmon64a installed.
@@ -406,21 +412,23 @@ Starting Sysmon64a..
 Sysmon64a started.
 ```
 
-![PowerShell — Sysmon Install Output](installation-screenshots/sysmon/46-powershell-sysmon-install.png)
+![PowerShell — Sysmon Install Output](installation-screenshots/windows11-endpoint/46-powershell-sysmon-install.png)
 
 ### Verify the Service is Running
+
 ```powershell
 Get-Service *sysmon*
 ```
 
 Expected output:
+
 ```
 Status   Name       DisplayName
 ------   ----       -----------
 Running  Sysmon64a  Sysmon64a
 ```
 
-![PowerShell — Get-Service Sysmon Running](installation-screenshots/sysmon/47-powershell-get-service-sysmon.png)
+![PowerShell — Get-Service Sysmon Running](installation-screenshots/windows11-endpoint/47-powershell-get-service-sysmon.png)
 
 ---
 
